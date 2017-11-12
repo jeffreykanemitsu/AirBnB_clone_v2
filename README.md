@@ -155,10 +155,12 @@ No known bugs at this time.
 
 ## Authors
 Forked from:
+
 Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
 Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
 
 Updated by:
+
 Anoop Macharla - [Github](https://github.com/amacharla) / [Twitter](https://twitter.com/noop_lion)
 Jeffrey Kanemitsu - [Github](https://github.com/jeffreykanemitsu) / [Twitter](https://twitter.com/canofmisosoup)
 
