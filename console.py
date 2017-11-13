@@ -40,7 +40,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return False
         if args[0] in classes:
-            instance = classes[args[0]]()
+            attr = {}
+            for n in args[1:]:  # get attr
+                n, v = n.split("=")
+                v = v.replace('_', ' ')
+                if v.isdigit() and "id" not in n:
+                    v = float(v) if '.' in v else int(v)
+                attr[n] = v
+            instance = classes[args[0]](**attr)  # create inst with or without attr
         else:
             print("** class doesn't exist **")
             return False
