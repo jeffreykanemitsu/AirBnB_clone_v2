@@ -24,9 +24,10 @@ class FileStorage:
     # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         """returns the dictionary __objects"""
         return self.__objects
+
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
@@ -51,3 +52,11 @@ class FileStorage:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
         except:
             pass
+
+    def delete(self, obj=None):
+        """deletes ojbect from __objects dict"""
+        if obj:
+            for key, value in self.__objects.items():
+                if value == obj:
+                    del self.__objects[key]
+                    break
