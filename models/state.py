@@ -1,8 +1,9 @@
 #!/usr/bin/python
 """ holds class State"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Interger, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+import os
 
 
 class State(BaseModel, Base):
@@ -11,8 +12,18 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
+    enviroment = {
+                    'user': HBNB_MYSQL_USER, 'password': HBNB_MYSQL_PWD,
+                    'host': HBNB_MYSQL_HOST, 'database': HBNB_MYSQL_DB
+                }
+    for var, env in enviroment.items():
+        enviroment[var] = os.getenv(env, None)
+
     # DBStorage
-    cities = relationship("City", backref="state")
+    if enviroment['database']:
+        cities = relationship("City", backref="state")
+    else:
+
 
     # FileStorage
 
