@@ -19,8 +19,11 @@ class Place(BaseModel):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float)
         longitude = Column(Float)
+        amenity_ids = []
         reviews = relationship('Review', cascade='all, delete',
                                backref='place')
+        amenities = relationship('Amenity', secondary='place_amenity',
+                                 viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -37,3 +40,15 @@ class Place(BaseModel):
     def __init__(self, *args, **kwargs):
         """initializes Place"""
         super().__init__(*args, **kwargs)
+
+class PlaceAmenity(Base)
+    """place amenity"""
+    if:
+        __tablename__ = 'place_amenity'
+        metadata= Base.metadata
+        place_id = Column(String(60), ForeignKey('places.id'),
+                          primary_key=True, nullable=False)
+        amenity_id = Column(String(60, ForeignKey('amenities.id'),
+                            primary_key=True, nullable=False)
+
+        
