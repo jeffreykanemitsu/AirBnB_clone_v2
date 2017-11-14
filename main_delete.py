@@ -14,7 +14,7 @@ new_state = State()
 new_state.name = "California"
 fs.new(new_state)
 fs.save()
-print("New State: {}".format(new_state))
+print("New State: {}".format(fs.all(new_state)))
 
 # All States
 print("All States: {}".format(fs.all(State)))
