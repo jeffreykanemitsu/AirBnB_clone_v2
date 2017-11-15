@@ -39,6 +39,28 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
+        @property
+        def reviews(self):
+            """
+            getter that returns list of reviews with place_id == Place.id
+            """
+            review_list = []
+            for inst in models.storage.all(Reviews).values():
+                if inst.place_id == self.id:
+                    review_list.append(inst)
+            return review_list
+
+        @property
+        def amenities(self):
+            """
+            getter that returns list of Amenity with place_id == Place.id
+            """
+            amenity_list = []
+            for inst in models.storage.all(Amenity).values():
+                if inst.place_id == self.id:
+                    amenity_list.append(inst)
+            return amenity_list
+
         def __init__(self, *args, **kwargs):
             """initializes Place"""
             super().__init__(*args, **kwargs)
