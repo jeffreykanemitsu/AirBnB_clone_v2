@@ -6,14 +6,13 @@ Contains class BaseModel
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
+from os import getenv
 import models
 import uuid
-import os
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-db_test = os.getenv("HBNB_TYPE_STORAGE", None)
 
-if db_test:  # if database
+if getenv("HBNB_TYPE_STORAGE") == "db":  # if database
     Base = declarative_base()
 else:
     Base = object
