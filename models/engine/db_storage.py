@@ -1,18 +1,19 @@
 #!/usr/bin/python3
 """Engine for Database Storage"""
-import os
+
+from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
+from models.state import State
 from models.city import City
 from models.place import Place
 from models.review import Review
-from models.state import State
 from models.user import User
 
 
-class DbStorage:
+class DBStorage:
     """db storage class"""
 
     __engine = None
@@ -22,15 +23,17 @@ class DbStorage:
         """ creates connection to db"""
         dilect = 'mysql'
         driver = 'mysqldb'
-        usr = os.getenv('HBNB_MYSQL_USER', 'hbnb_dev')
-        pwd = os.getenv('HBNB_MYSQL_PWD', 'hbnb_dev_pwd')
-        host = os.getenv('HBNB_MYSQL_HOST', 'localhost')
-        db = os.getenv('HBNB_MYSQL_DB', 'hbnb_dev_db')
-        self.__engine = create_engine(dilect+driver+'://'+usr+':'+pwd+'@'+host+' '+db)
+        usr = getenv('HBNB_MYSQL_USER', 'hbnb_dev')
+        pwd = getenv('HBNB_MYSQL_PWD', 'hbnb_dev_pwd')
+        host = getenv('HBNB_MYSQL_HOST', 'localhost')
+        db = getenv('HBNB_MYSQL_DB', 'hbnb_dev_db')
+        self.__engine = create_engine("{}+{}://{}:{}@{}/{}".format(
+            dilect, driver, usr, pwd, host, db))
 
-        if os.getenv('HBNB_ENV') == 'test':
+        if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
-        #Base.metadata.create_all(self.__engine)
+
+        Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         """query on current db"""
@@ -66,4 +69,4 @@ class DbStorage:
         """load all tables"""
         Base.metadata.create_all(self.__engine)
         scoped = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        self.__session = scoped_session(session_factory)  # make thread safe
+        self.__session = scoped_session(scoped)  # make thread safe
