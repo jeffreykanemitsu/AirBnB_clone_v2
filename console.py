@@ -47,7 +47,7 @@ class HBNBCommand(cmd.Cmd):
                 if v.isdigit() and "id" not in n:
                     v = float(v) if '.' in v else int(v)
                 attr[n] = v
-            instance = classes[args[0]](**attr)  # create inst with or without attr
+            instance = classes[args[0]](**attr)
         else:
             print("** class doesn't exist **")
             return False
