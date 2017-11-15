@@ -4,11 +4,14 @@ from models.base_model import BaseModel
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import os
+import models
+
 
 class Amenity(BaseModel):
     """Representation of Amenity """
 
-    if:
+    if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'amenities'
         name = Column(String(128), nullable=False)
         place_amenities = relationship('Place', secondary='place_amenity')

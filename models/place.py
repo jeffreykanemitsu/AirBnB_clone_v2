@@ -1,13 +1,15 @@
 #!/usr/bin/python
 """ holds class Place"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, ForeignKey
+import os
+import models
 
 
-class Place(BaseModel):
+class Place(BaseModel, Base):
     """Representation of Place """
-    if:
+    if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -41,14 +43,13 @@ class Place(BaseModel):
         """initializes Place"""
         super().__init__(*args, **kwargs)
 
+
 class PlaceAmenity(Base)
-    """place amenity"""
-    if:
+"""place amenity"""
+if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'place_amenity'
-        metadata= Base.metadata
+        metadata = Base.metadata
         place_id = Column(String(60), ForeignKey('places.id'),
                           primary_key=True, nullable=False)
         amenity_id = Column(String(60, ForeignKey('amenities.id'),
-                            primary_key=True, nullable=False)
-
-        
+                            primary_key=True, nullable=False))

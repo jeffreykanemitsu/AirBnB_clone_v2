@@ -4,10 +4,13 @@ from models.base_model import BaseModel
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
+import os
+import models
+
 
 class City(BaseModel):
     """Representation of city """
-    if:
+    if os.getenv("HBNB_MYSQL_DB") == "db":
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
         name = Column(String(128), nullable=False)
         places = relationship('Place', cascade='all, delete', backref='cities')

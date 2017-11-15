@@ -4,10 +4,13 @@ from models.base_model import BaseModel
 import sqlalchemy
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
+import os
+import models
+
 
 class User(BaseModel):
     """Representation of a user """
-    if:
+    if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
