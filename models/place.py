@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ holds class Place"""
 from models.base_model import BaseModel, Base
 import sqlalchemy
@@ -9,7 +9,7 @@ import models
 
 class Place(BaseModel, Base):
     """Representation of Place """
-    if os.getenv("HBNB_MYSQL_DB") == "db":
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -39,17 +39,6 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    def __init__(self, *args, **kwargs):
-        """initializes Place"""
-        super().__init__(*args, **kwargs)
-
-
-class PlaceAmenity(Base)
-"""place amenity"""
-if os.getenv("HBNB_MYSQL_DB") == "db":
-        __tablename__ = 'place_amenity'
-        metadata = Base.metadata
-        place_id = Column(String(60), ForeignKey('places.id'),
-                          primary_key=True, nullable=False)
-        amenity_id = Column(String(60, ForeignKey('amenities.id'),
-                            primary_key=True, nullable=False))
+        def __init__(self, *args, **kwargs):
+            """initializes Place"""
+            super().__init__(*args, **kwargs)

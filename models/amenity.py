@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ holds class Amenity"""
 from models.base_model import BaseModel, Base
 import sqlalchemy
@@ -11,13 +11,13 @@ import models
 class Amenity(BaseModel, Base):
     """Representation of Amenity """
 
-    if os.getenv("HBNB_MYSQL_DB") == "db":
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = 'amenities'
         name = Column(String(128), nullable=False)
         place_amenities = relationship('Place', secondary='place_amenity')
     else:
         name = ""
 
-    def __init__(self, *args, **kwargs):
-        """initializes Amenity"""
-        super().__init__(*args, **kwargs)
+        def __init__(self, *args, **kwargs):
+            """initializes Amenity"""
+            super().__init__(*args, **kwargs)

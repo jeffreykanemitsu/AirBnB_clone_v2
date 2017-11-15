@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ holds class User"""
 from models.base_model import BaseModel, Base
 import sqlalchemy
@@ -10,7 +10,7 @@ import models
 
 class User(BaseModel, Base):
     """Representation of a user """
-    if os.getenv("HBNB_MYSQL_DB") == "db":
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = 'users'
         email = Column(String(128), nullable=False)
         password = Column(String(128), nullable=False)
@@ -24,6 +24,6 @@ class User(BaseModel, Base):
         first_name = ""
         last_name = ""
 
-    def __init__(self, *args, **kwargs):
-        """initializes user"""
-        super().__init__(*args, **kwargs)
+        def __init__(self, *args, **kwargs):
+            """initializes user"""
+            super().__init__(*args, **kwargs)
