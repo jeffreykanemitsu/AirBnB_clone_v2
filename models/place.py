@@ -30,7 +30,6 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float)
         longitude = Column(Float)
-        amenity_ids = []
         reviews = relationship('Review', cascade='all, delete',
                                backref='place')
         amenities = relationship('Amenity', secondary='place_amenity',
@@ -46,7 +45,6 @@ class Place(BaseModel, Base):
         price_by_night = 0
         latitude = 0.0
         longitude = 0.0
-        amenity_ids = []
 
         @property
         def reviews(self):
