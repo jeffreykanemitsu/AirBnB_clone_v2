@@ -25,9 +25,14 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """returns the dictionary __objects"""
-        return self.__objects
-
+        """returns the dictionary __objects or specified cls __objs"""
+        if cls:
+            attr = {}
+            for k, o in self.__objects.items():
+                if o.__class__.__name__ == cls.__class__.__name__:
+                    attr[k] = o
+            return attr  # return only cls obj in __objects
+        return self.__objects  # return all __objects
 
     def new(self, obj):
         """sets in __objects the obj with key <obj class name>.id"""
