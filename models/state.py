@@ -1,9 +1,14 @@
 #!/usr/bin/python
 """ holds class State"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
+import os
+import models
 
 
-class State(BaseModel):
+class State(BaseModel, Base):
     """Representation of state """
     if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'states'

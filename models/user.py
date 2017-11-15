@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """ holds class User"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
@@ -8,7 +8,7 @@ import os
 import models
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """Representation of a user """
     if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'users'

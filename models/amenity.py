@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """ holds class Amenity"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -8,7 +8,7 @@ import os
 import models
 
 
-class Amenity(BaseModel):
+class Amenity(BaseModel, Base):
     """Representation of Amenity """
 
     if os.getenv("HBNB_MYSQL_DB") == "db":

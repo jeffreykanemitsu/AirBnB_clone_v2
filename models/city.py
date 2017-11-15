@@ -1,6 +1,6 @@
 #!/usr/bin/python
 """ holds class City"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
@@ -8,7 +8,7 @@ import os
 import models
 
 
-class City(BaseModel):
+class City(BaseModel, Base):
     """Representation of city """
     if os.getenv("HBNB_MYSQL_DB") == "db":
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)

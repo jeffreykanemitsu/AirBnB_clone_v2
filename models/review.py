@@ -1,13 +1,13 @@
 #!/usr/bin/python
 """ holds class Review"""
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, String, ForeignKey
 import models
 import os
 
 
-class Review(BaseModel):
+class Review(BaseModel, Base):
     """Representation of Review """
     if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = 'reviews'
