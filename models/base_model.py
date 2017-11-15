@@ -40,7 +40,8 @@ class BaseModel:
                 self.created_at = datetime.strptime(kwargs["created_at"], time)
             if hasattr(self, "updated_at") and type(self.updated_at) is str:
                 self.updated_at = datetime.strptime(kwargs["updated_at"], time)
-        else: newObj = 1
+        else:
+            newObj = 1
 
         if newObj:
             self.id = str(uuid.uuid4())
