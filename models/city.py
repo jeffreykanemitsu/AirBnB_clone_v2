@@ -1,19 +1,26 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """ holds class City"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
+import os
 
 
 class City(BaseModel, Base):
     """Representation of city """
 
-    __tablename__ = "cities"
-    state_id = Column(String(60), nullable=False, ForeignKey="states.id")
-    name = Column(String(128), nullable=False)
+    if os.getenv("HBNB_MYSQL_DB") == "db":  # if database
 
-    places = relationship("Place", backref="cities")
+        __tablename__ = "cities"
+        state_id = Column(String(60), nullable=False, ForeignKey="states.id")
+        name = Column(String(128), nullable=False)
 
-    def __init__(self, *args, **kwargs):
-        """initializes city"""
-        super().__init__(*args, **kwargs)
+        places = relationship("Place", backref="cities")
+
+    else:  # if filestorage
+        state_id = ""
+        name = ""
+
+        def __init__(self, *args, **kwargs):
+            """initializes city"""
+            super().__init__(*args, **kwargs)

@@ -11,12 +11,10 @@ import models
 class State(BaseModel, Base):
     """Representation of state """
 
-    __tablename__ = "states"
-    name = Column(String(128), nullable=False)
-
-
     # DBStorage
-    if os.getenv("HBNB_MYSQL_DB") == "db"
+    if os.getenv("HBNB_MYSQL_DB") == "db":
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
         cities = relationship("City", backref="state")
     else: # FileStorage
         @property
@@ -28,7 +26,6 @@ class State(BaseModel, Base):
                     city_list.append(inst)
             return city_list
 
-
-    def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
+        def __init__(self, *args, **kwargs):
+            """initializes state"""
+            super().__init__(*args, **kwargs)
