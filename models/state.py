@@ -15,7 +15,7 @@ class State(BaseModel, Base):
     if os.getenv("HBNB_MYSQL_DB") == "db":
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
+        cities = relationship("City", cascase="all, delete", backref="state")
     else: # FileStorage
         @property
         def cities(self):

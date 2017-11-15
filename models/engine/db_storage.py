@@ -17,6 +17,7 @@ class DbStorage:
 
     __engine = None
     __session = None
+
     def __init__(self):
         """ creates connection to db"""
         dilect = 'mysql'
@@ -27,7 +28,9 @@ class DbStorage:
         db = os.getenv('HBNB_MYSQL_DB', 'hbnb_dev_db')
         self.__engine = create_engine(dilect+driver+'://'+usr+':'+pwd+'@'+host+' '+db)
 
-        Base.metadata.create_all(self.__engine)
+        if os.getenv('HBNB_ENV') == 'test':
+            Base.metadata.drop_all(self.__engine)
+        #Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         """query on current db"""
@@ -63,5 +66,4 @@ class DbStorage:
         """load all tables"""
         Base.metadata.create_all(self.__engine)
         scoped = sessionmaker(bind=self.__engine, expire_on_commit=False)
-        Session = scoped_session(session_factory)  # make thread safe
-        self.__session = Session()
+        self.__session = scoped_session(session_factory)  # make thread safe
