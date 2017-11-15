@@ -9,7 +9,7 @@ import os
 class City(BaseModel, Base):
     """Representation of city """
 
-    if os.getenv("HBNB_MYSQL_DB") == "db":  # if database
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":  # if database
 
         __tablename__ = "cities"
         state_id = Column(String(60), ForeignKey="states.id", nullable=False)

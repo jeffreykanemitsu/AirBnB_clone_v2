@@ -12,7 +12,7 @@ class State(BaseModel, Base):
     """Representation of state """
 
     # DBStorage
-    if os.getenv("HBNB_MYSQL_DB") == "db":
+    if os.getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascase="all, delete", backref="state")

@@ -11,7 +11,7 @@ import uuid
 import os
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-db_test = os.getenv("HBNB_MYSQL_DB", None)
+db_test = os.getenv("HBNB_TYPE_STORAGE", None)
 
 if db_test:  # if database
     Base = declarative_base()
