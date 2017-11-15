@@ -5,7 +5,7 @@ Contains class BaseModel
 
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import models
 import uuid
 
@@ -16,9 +16,9 @@ Base = declarative_base()
 class BaseModel:
     """The BaseModel class from which future classes will be derived"""
 
-    #id = Column(String(60), nullable=False, primary_key=True, unique=True)
-    #created_at = Column(default=datetime.utnow(), nullable=False)
-    #updated_at = Column(default=datetime.utnow(), onupdate=datetime.utnow(), nullable=False)
+    id = Column(String(60), nullable=False, primary_key=True, unique=True)
+    created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
+    updated_at = Column(DateTime, default=datetime.utcnow(), onupdate=datetime.utcnow(), nullable=False)
 
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
