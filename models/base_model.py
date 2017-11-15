@@ -58,7 +58,7 @@ class BaseModel:
             new_dict["created_at"] = new_dict["created_at"].strftime(time)
         if "updated_at" in new_dict:
             new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
-        new_dict.pop("_sa_instance_state", '')
+        new_dict.pop("_sa_instance_state", None)
         new_dict["__class__"] = self.__class__.__name__
         return new_dict
 
