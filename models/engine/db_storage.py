@@ -2,7 +2,7 @@
 """Engine for Database Storage"""
 import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scopped_session
+from sqlalchemy.orm import sessionmaker, scoped_session
 from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from models.city import City
@@ -22,10 +22,12 @@ class DbStorage:
         dilect = 'mysql'
         driver = 'mysqldb'
         usr = os.getenv('HBNB_MYSQL_USER', 'hbnb_dev')
-        pwd = os.getenv('HBNB_MYSQL_PWD', 'hbnb_dev_pwd'
+        pwd = os.getenv('HBNB_MYSQL_PWD', 'hbnb_dev_pwd')
         host = os.getenv('HBNB_MYSQL_HOST', 'localhost')
         db = os.getenv('HBNB_MYSQL_DB', 'hbnb_dev_db')
         self.__engine = create_engine(dilect+driver+'://'+usr+':'+pwd+'@'+host+' '+db)
+
+        Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         """query on current db"""
@@ -41,7 +43,7 @@ class DbStorage:
 
         obj_dict = {}
         for obj in result:
-            obj_dict[str(obj)] = obj # TESTING STR(OBJ)
+            obj_dict["{0.__class__.__name__}.{0.id}".format(obj)] = obj
         return obj_dict
 
     def new(self, obj):
@@ -63,6 +65,3 @@ class DbStorage:
         scoped = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)  # make thread safe
         self.__session = Session()
-
-
-
