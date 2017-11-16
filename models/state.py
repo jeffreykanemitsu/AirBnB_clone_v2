@@ -15,10 +15,11 @@ class State(BaseModel, Base):
         __tablename__ = "states"
         name = Column(String(128), nullable=False)
         cities = relationship("City", cascade="all, delete", backref="state")
-    else: # FileStorage
+    else:  # FileStorage
         @property
         def cities(self):
-            """getter that returns list of city inst with state_id == State.id"""
+            """getter that returns list of city inst
+                with state_id == State.id"""
             city_list = []
             for inst in models.storage.all(City).values():
                 if inst.state_id == self.id:
