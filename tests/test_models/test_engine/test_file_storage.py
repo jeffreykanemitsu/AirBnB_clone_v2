@@ -69,12 +69,18 @@ test_file_storage.py'])
 
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
-    def test_all_returns_dict(self):
+    def test_all(self):
         """Test that all returns the FileStorage.__objects attr"""
         storage = FileStorage()
         new_dict = storage.all()
         self.assertEqual(type(new_dict), dict)
         self.assertIs(new_dict, storage._FileStorage__objects)
+        """Testing that all with cls passed as arg returns all cls objs"""
+        for key, value in classes.items():
+            with self.subTest(key=key, value=value):
+                instance = value()
+                storage.new(instance)
+                self.assertIn(instance, storage.all(instance).values())
 
     def test_new(self):
         """test that new adds an object to the FileStorage.__objects attr"""
@@ -96,12 +102,12 @@ class TestFileStorage(unittest.TestCase):
         os.remove("file.json")
         storage = FileStorage()
         new_dict = {}
-        for key, value in classes.items():
+        for key, value in classes.items():  # init instances
             instance = value()
             instance_key = instance.__class__.__name__ + "." + instance.id
             new_dict[instance_key] = instance
         save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = new_dict
+        FileStorage._FileStorage__objects = new_dict  # adding test inst to __obj
         storage.save()
         FileStorage._FileStorage__objects = save
         for key, value in new_dict.items():
@@ -113,15 +119,15 @@ class TestFileStorage(unittest.TestCase):
 
     def test_delete(self):
         """test that delete deletes passed object from FileStorage.__objects attr"""
+        os.remove("file.json")
         storage = FileStorage()
-        save = FileStorage._FileStorage__objects
-        FileStorage._FileStorage__objects = {}
-        test_dict = {}
-        for key, value in classes.items():
-            with self.subTest(key=key, value=value):
-                instance = value()
-                instance_key = instance.__class__.__name__ + "." + instance.id
-                storage.delete(instance)
-                del test_dict[instance_key]
-                self.assertEqual(test_dict, storage._FileStorage__objects)
-        FileStorage._FileStorage__objects = save
+        objs = FileStorage._FileStorage__objects
+        test_state = classes.get("State")()
+        test_state.name = "Lionvil"
+        storage.new(test_state)
+        storage.save()
+        fs_inst = FileStorage._FileStorage__objects.values()
+        self.assertIn(test_state, fs_inst)
+        storage.delete(test_state)
+        self.assertNotIn(test_state, FileStorage._FileStorage__objects.values())
+
