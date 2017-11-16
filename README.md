@@ -1,5 +1,5 @@
 # AirBnB Clone v2 - MySQL
-The AirBnB clone - MySQL project connects our previous AirBnB clone - The Console, to a MySQL database. 
+The AirBnB clone - MySQL project connects our previous AirBnB clone v1 - The Console, to a MySQL database. 
 
 <img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/263/HBTN-hbnb-Final.png" style="height:15%;width:15%" />
 
@@ -16,7 +16,7 @@ The AirBnB clone - MySQL project connects our previous AirBnB clone - The Consol
 
 ## Table of Content
 * [Installation](#installation)
-* [Environmental Variables](#environmental_variables)
+* [Environmental Variables](#environmental-variables)
 * [File Descriptions](#file-descriptions)
 * [Usage](#usage)
 * [Examples of use](#examples-of-use)
