@@ -115,3 +115,30 @@ class TestUser(unittest.TestCase):
         user = User()
         string = "[User] ({}) {}".format(user.id, user.__dict__)
         self.assertEqual(string, str(user))
+
+    @unittest.skipIf(environ.get('HBNB_TYPE_STORAGE') == 'fs',
+            "FOR DB STORAGE ONLY")
+    def setUp(self):
+        os.environ["HBNB_TYPE_STORAGE"] = "db"
+        userRow = User(**{'email': "johndoe@gmail.com",
+                        'password': "j0hn",
+                        'first_name': "John",
+                        'last_name': "Doe"})
+
+    @unittest.skipIf(environ.get('HBNB_TYPE_STORAGE') == 'fs',
+            "FOR DB STORAGE ONLY")
+    def test_isChild(self):
+        """test if instance is child of User"""
+        self.assertIsInstance(self.userRow, User)
+
+    @unittest.skipIf(environ.get('HBNB_TYPE_STORAGE') == 'fs',
+            "FOR DB STORAGE ONLY")
+    def test_attributes(self):
+        """Test to see for all user attr"""
+        self.assertTrue(hasattr(self.userRow, 'id'))
+        self.assertTrue(hasattr(self.userRow, 'created_at'))
+        self.assertTrue(hasattr(self.userRow, 'updated_at'))
+        self.assertTrue(hasattr(self.userRow, 'email'))
+        self.assertTrue(hasattr(self.userRow, 'password'))
+        self.assertTrue(hasattr(self.userRow, 'first_name'))
+        self.assertTrue(hasattr(self.userRow, 'last_name'))
