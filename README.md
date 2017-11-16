@@ -32,12 +32,12 @@ The AirBnB clone - MySQL project connects our previous AirBnB clone v1 - The Con
 
 ## Environmental Variables
 For this project, we used the following environmental variables:
-	* HBNB_ENV: running environment. It can be “dev” or “test” for the moment (“production” soon!)
-	* HBNB_MYSQL_USER: the username of your MySQL
-	* HBNB_MYSQL_PWD: the password of your MySQL
-	* HBNB_MYSQL_HOST: the hostname of your MySQL
-	* HBNB_MYSQL_DB: the database name of your MySQL
-	* HBNB_TYPE_STORAGE: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
+* `HBNB_ENV`: running environment. It can be “dev” or “test” for the moment (“production” soon!)
+* `HBNB_MYSQL_USER`: the username of your MySQL
+* `HBNB_MYSQL_PWD`: the password of your MySQL
+* `HBNB_MYSQL_HOST`: the hostname of your MySQL
+* `HBNB_MYSQL_DB`: the database name of your MySQL
+* `HBNB_TYPE_STORAGE`: the type of storage used. It can be “file” (using FileStorage) or db (using DBStorage)
 
 ## File Descriptions
 [console.py](console.py) - the console contains the entry point of the command interpreter. 
