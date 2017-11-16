@@ -25,8 +25,9 @@ class BaseModel:
     id = Column(String(60), nullable=False, primary_key=True, unique=True)
     created_at = Column(DateTime, default=datetime.utcnow(), nullable=False)
     updated_at = Column(DateTime, default=datetime.utcnow(),
-            onupdate=datetime.utcnow(), nullable=False)
+                        onupdate=datetime.utcnow(), nullable=False)
 #else:
+
     def __init__(self, *args, **kwargs):
         """Initialization of the base model"""
         newObj = 0
@@ -71,6 +72,6 @@ class BaseModel:
         return new_dict
 
     def delete(self):
-        """delete the current instance from storage by calling the `delete` method"""
+        """delete the current instance from storage by calling
+           the `delete` method"""
         models.storage.delete(self)
-
