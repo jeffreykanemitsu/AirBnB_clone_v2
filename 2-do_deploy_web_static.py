@@ -25,9 +25,9 @@ def do_deploy(archive_path):
         run('sudo tar -xzf /tmp/{} -C {}'.format(name, new_dir))
         run('sudo rm /tmp/{}'.format(name))
         run('sudo mv {}/web_static/* {}/'.format(new_dir, new_dir))
-        run('sudo rm -rf {}/web_statuc'.format(new_dir))
+        run('sudo rm -rf {}/web_static'.format(new_dir))
         run('sudo rm -rf /data/web_static/current')
-        run('sudo ln -s {} /data/we_static/current'.format(new_dir))
+        run('sudo ln -s {} /data/web_static/current'.format(new_dir))
         return True
     except:
         return False
